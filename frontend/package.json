@@ -1,0 +1,35 @@
+{
+  "name": "crm-uniqlo-frontend",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Front-end CRM Uniqlo: web-crm (đăng nhập chung, Quản lý, Khách hàng) và web-admin (Quản trị).",
+  "scripts": {
+    "dev:crm": "vite web-crm",
+    "dev:admin": "vite web-admin",
+    "typecheck": "tsc -p web-crm && tsc -p web-admin",
+    "build": "npm run typecheck && vite build web-crm && vite build web-admin",
+    "publish:api": "node scripts/copy-dist.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "5.3.0",
+    "@hookform/resolvers": "5.9.2",
+    "@tanstack/react-query": "5.104.4",
+    "lucide-react": "0.577.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-hook-form": "7.90.0",
+    "react-router": "7.18.4",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "5.2.0",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vite": "7.3.7"
+  }
+}

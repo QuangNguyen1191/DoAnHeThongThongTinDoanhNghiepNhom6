@@ -1,0 +1,41 @@
+PASS  Tổng quan: đủ 7 lối tắt chức năng
+PASS  Danh sách khách hàng đọc API thật  — 12 khách
+PASS  Lọc theo hạng VIP  — 2 khách VIP
+PASS  CN1: thiếu họ tên/SĐT → báo lỗi tại ô
+PASS  CN1: SĐT trùng khách khác → báo lỗi ở ô SĐT
+PASS  CN1: thêm khách + cấp tài khoản, hiện mật khẩu tạm 1 lần  — kh.e2e04676984
+PASS  CN1: hồ sơ 360° của khách mới
+PASS  CN1: khách mới đăng nhập bằng mật khẩu tạm → bắt buộc đổi mật khẩu
+PASS  CN3: khóa cần lý do (nút bị khóa khi trống)
+PASS  CN3: trạng thái chuyển Đã khóa
+PASS  CN3: kh.binh bị khóa → không đăng nhập được
+PASS  CN3: mở khóa → kh.binh đăng nhập lại được
+PASS  CN2: xóa mềm → hồ sơ Đã xóa, ẩn nút thao tác
+PASS  CN2: không còn trong danh sách đang hoạt động
+PASS  CN2: xuất hiện ở bộ lọc Đã xóa
+PASS  CN4: tab Mới có phản hồi chờ tiếp nhận  — 5 phản hồi mới
+PASS  CN4: tiếp nhận → rời tab Mới
+PASS  CN4: phân loại lại Khiếu nại
+PASS  CN4: trả lời → Đã xử lý, hiện nội dung trả lời
+PASS  CN5: tỷ lệ theo nhóm tuổi  — 6 nhóm
+PASS  CN5: tải CSV nhóm tuổi
+PASS  CN5: sở thích theo loại SP và theo nhóm tuổi
+PASS  CN6: tạo khảo sát nháp  — MaKS 5
+PASS  CN6: thêm 3 câu hỏi (thang điểm, một lựa chọn, tự luận)
+PASS  CN6: xem trước số khách VIP sẽ nhận  — 2 khách
+PASS  CN6: gửi → trạng thái Đã gửi
+PASS  CN6: khảo sát xuất hiện trong tài khoản kh.an
+PASS  CN6: kh.an nộp khảo sát, nhận voucher  — V5-9446E32C
+PASS  CN7: thống kê có 1 người hoàn thành  — Đã hoàn thành  1  Khách đã nộp bài
+PASS  CN7: điểm trung bình câu thang điểm = 4
+PASS  CN7: phân bố lựa chọn và câu tự luận
+PASS  CN6: đóng khảo sát
+PASS  CSKH: không có nút Thêm khách hàng
+PASS  CSKH: hồ sơ không có nút Xóa / Khóa
+PASS  CSKH: menu không có Báo cáo
+PASS  CSKH: gõ URL thêm khách → không có quyền
+PASS  CSKH: gọi thẳng API xóa → 403 (CSDL chặn 50003)  — 403
+PASS  CSKH: xử lý được phản hồi (có nút Tiếp nhận)
+PASS  Không có lỗi JavaScript trên trang
+
+TỔNG: 39/39 PASS

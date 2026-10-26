@@ -1,0 +1,50 @@
+PASS  Trang đăng nhập chung không còn ô tài khoản demo
+PASS  Trang đăng nhập chung không nhắc đến khu vực Quản trị
+PASS  admin.it đăng nhập ở trang chung → bị từ chối như sai mật khẩu
+PASS  Sai mật khẩu → thông báo chung  — Sai tên đăng nhập hoặc mật khẩu.
+PASS  Sai mật khẩu → xóa ô mật khẩu, giữ tên
+PASS  Tên không tồn tại → cùng thông báo
+PASS  Tài khoản bị khóa → thông báo khóa (403)  — Tài khoản không thể đăng nhập  Tài khoản đã bị khóa. Vui lòng liên hệ quản trị/cửa hàng.
+PASS  Hồ sơ đã xóa → không vào được  — Tài khoản không thể đăng nhập  Tài khoản đã bị khóa. Vui lòng liên hệ quản trị/cửa hàng.
+PASS  ql.lan → /manager, dashboard có số liệu thật
+PASS  ql.lan gõ URL /customer/profile → 403
+PASS  ql.lan gõ URL /admin/accounts ở web-crm → 404 (không có khu vực Quản trị)
+PASS  Đang đăng nhập mà vào /login → về /manager
+PASS  Đăng xuất → /login?da-dang-xuat=1
+PASS  Back sau đăng xuất không hiện dữ liệu  — http://localhost:5173/admin/accounts
+PASS  Sau đăng xuất /api/auth/me → 401
+PASS  Chưa đăng nhập vào /manager/reports → /login?quay-lai
+PASS  cskh.hoa quay lại /manager/reports → trạng thái 403
+PASS  cskh.hoa không thấy menu Báo cáo
+PASS  cskh.hoa dashboard: khối thiếu quyền hiện lý do
+PASS  kh.an → /customer
+PASS  kh.an gõ URL /manager/customers → 403
+PASS  Cookie khách gọi API Quản lý → 403  — 403
+PASS  Lịch sử mua hàng đọc API thật (/api/customer/purchases)
+PASS  web-admin chưa đăng nhập → /login của chính web-admin
+PASS  Trang đăng nhập Admin không có đăng ký thành viên
+PASS  kh.an đăng nhập ở trang Admin → bị từ chối như sai mật khẩu
+PASS  ql.lan đăng nhập ở trang Admin → bị từ chối như sai mật khẩu
+PASS  admin.it đăng nhập ở trang Admin → quay lại /admin/audit-log
+PASS  admin.it vào /admin/roles
+PASS  Admin và Quản lý đăng nhập cùng trình duyệt, 2 phiên độc lập  — admin.it / ql.lan
+PASS  Đăng xuất ở web-admin → /login của web-admin
+PASS  it.mai /admin/roles → 403 trong khung
+PASS  ql.lan gõ URL web-admin → trang đăng nhập Admin, không vào được
+PASS  Phiên Quản lý không dùng được ở /api/admin (401)  — 401
+PASS  Khóa tài khoản đang đăng nhập → request kế tiếp về /login?het-phien=1  — lock=204 url=http://localhost:5173/login?het-phien=1&quay-lai=%2Fmanager
+PASS  Mật khẩu tạm → mọi route khu vực chuyển về /change-password
+PASS  API nghiệp vụ khi phải đổi mật khẩu → 428  — 428
+PASS  Đổi mật khẩu xong → vào /customer
+PASS  Đăng ký trống → lỗi tại trường
+PASS  Đăng ký trùng SĐT → lỗi tại ô SĐT  — Số điện thoại đã thuộc một hồ sơ khách hàng đang hoạt động.
+PASS  Đăng ký mới → tự đăng nhập, vào /customer  — http://localhost:5173/customer
+PASS  Còn ≤2 phút → hiện cảnh báo sắp hết phiên
+PASS  Hết giờ → đăng xuất, /login?het-phien=1  — http://localhost:5173/login?het-phien=1&quay-lai=%2Fcustomer
+PASS  Sau hết phiên cookie đã bị xóa (me → 401)
+PASS  Quên mật khẩu → thông báo chung, không lộ tài khoản
+PASS  API gửi email có liên kết đặt lại
+PASS  Mã đặt lại được xóa khỏi thanh địa chỉ  — http://localhost:5173/dat-lai-mat-khau
+PASS  Đặt lại mật khẩu → đăng nhập bằng mật khẩu mới
+PASS  Dùng lại liên kết đã dùng → báo liên kết không còn hiệu lực
+PASS  Không có lỗi JavaScript trên trang

@@ -1,0 +1,36 @@
+# Build
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+.vs/
+.vscode/*
+!.vscode/settings.json
+.idea/
+TestResults/
+*.trx
+coverage*/
+
+# Bí mật: KHÔNG commit. Dùng User Secrets hoặc biến môi trường.
+appsettings.*.local.json
+appsettings.Production.json
+secrets*.json
+!secrets.example.json
+*.env
+.env*
+!.env.example
+*.pfx
+*.key
+
+# Bản build front-end được chép vào wwwroot khi triển khai
+src/CrmUniqlo.Api/wwwroot/web-crm/
+src/CrmUniqlo.Api/wwwroot/web-admin/
+
+# Email ghi ra thư mục khi phát triển (chứa mã đặt lại mật khẩu)
+.mail/
+
+# Hệ điều hành
+.DS_Store
+Thumbs.db

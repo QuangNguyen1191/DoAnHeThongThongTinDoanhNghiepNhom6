@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - run: dotnet restore
+      - run: dotnet build --no-restore -c Release
+      # Kiểm thử tích hợp cần SQL Server có CRM_Uniqlo_Test nên chỉ chạy kiểm thử đơn vị trên CI.
+      - run: dotnet test --no-build -c Release --filter "Category!=Integration"
+      - run: dotnet list package --vulnerable --include-transitive

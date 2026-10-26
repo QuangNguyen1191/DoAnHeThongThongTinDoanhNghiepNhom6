@@ -1,0 +1,231 @@
+# Bộ request mẫu CRM Uniqlo – dùng với Visual Studio 2022 (17.12+), Rider hoặc VS Code (REST Client).
+# Chạy theo thứ tự trong từng khối: lấy token CSRF → đăng nhập → gọi API.
+# Cookie phiên do công cụ tự giữ. Mật khẩu demo của mọi tài khoản mẫu: Demo@2026.
+
+@crm = http://localhost:5000
+@admin = http://localhost:5001
+
+###############################################################################
+# 0. Danh mục công khai (không cần đăng nhập)
+###############################################################################
+GET {{crm}}/api/catalog/provinces
+###
+GET {{crm}}/api/catalog/categories
+###
+GET {{crm}}/api/catalog/products
+###
+GET {{crm}}/api/catalog/tiers
+
+###############################################################################
+# 1. Cổng Quản lý (cổng 5000) – ql.lan
+###############################################################################
+# @name xsrfQl
+GET {{crm}}/api/auth/antiforgery
+
+###
+# @name loginQl
+POST {{crm}}/api/auth/login
+Content-Type: application/json
+X-XSRF-TOKEN: {{xsrfQl.response.body.$.xsrfToken}}
+
+{ "tenDangNhap": "ql.lan", "matKhau": "Demo@2026" }
+
+###
+GET {{crm}}/api/auth/me
+
+###
+GET {{crm}}/api/manager/dashboard
+
+###
+GET {{crm}}/api/manager/customers?tuKhoa=Nguyễn&sapXep=DIEM_CAO&trang=1&soDong=20
+
+###
+GET {{crm}}/api/manager/customers/1
+
+###
+POST {{crm}}/api/manager/customers
+Content-Type: application/json
+X-XSRF-TOKEN: {{loginQl.response.body.$.xsrfToken}}
+
+{
+  "hoTen": "Khách Demo Tại Quầy",
+  "sdt": "0887000001",
+  "gioiTinh": "NU",
+  "ngaySinh": "1995-03-08",
+  "maTinh": "HCM",
+  "dsLoaiQuanTam": [1, 2],
+  "tenDangNhap": "kh.demo.quay"
+}
+
+###
+GET {{crm}}/api/manager/feedback?trangThai=MOI
+
+###
+GET {{crm}}/api/manager/reports/demographics
+
+###
+GET {{crm}}/api/manager/reports/interests?format=csv&bang=theoLoai
+
+###
+GET {{crm}}/api/manager/surveys
+
+###
+POST {{crm}}/api/manager/surveys/2/send-preview
+Content-Type: application/json
+X-XSRF-TOKEN: {{loginQl.response.body.$.xsrfToken}}
+
+{ "maHang": "VIP", "tuoiTu": 25, "tuoiDen": 34 }
+
+###
+POST {{crm}}/api/auth/logout
+X-XSRF-TOKEN: {{loginQl.response.body.$.xsrfToken}}
+
+###############################################################################
+# 2. Cổng Khách hàng (cổng 5000) – kh.an
+###############################################################################
+# @name xsrfKh
+GET {{crm}}/api/auth/antiforgery
+
+###
+# @name loginKh
+POST {{crm}}/api/auth/login
+Content-Type: application/json
+X-XSRF-TOKEN: {{xsrfKh.response.body.$.xsrfToken}}
+
+{ "tenDangNhap": "kh.an", "matKhau": "Demo@2026" }
+
+###
+GET {{crm}}/api/customer/dashboard
+
+###
+GET {{crm}}/api/customer/profile
+
+###
+GET {{crm}}/api/customer/surveys
+
+###
+GET {{crm}}/api/customer/vouchers
+
+###
+GET {{crm}}/api/customer/purchases
+
+###
+GET {{crm}}/api/customer/purchases?tuNgay=2026-05-01&denNgay=2026-09-30
+
+###
+POST {{crm}}/api/customer/feedback
+Content-Type: application/json
+X-XSRF-TOKEN: {{loginKh.response.body.$.xsrfToken}}
+
+{ "maSP": 1, "loaiPH": "KHEN", "diemDanhGia": 5, "noiDung": "Áo mặc rất mát." }
+
+###############################################################################
+# 3. Cổng Admin (cổng 5001) – admin.it
+###############################################################################
+# @name xsrfAd
+GET {{admin}}/api/auth/antiforgery
+
+###
+# @name loginAd
+POST {{admin}}/api/auth/login
+Content-Type: application/json
+X-XSRF-TOKEN: {{xsrfAd.response.body.$.xsrfToken}}
+
+{ "tenDangNhap": "admin.it", "matKhau": "Demo@2026" }
+
+###
+GET {{admin}}/api/admin/dashboard?khoang=7
+
+###
+GET {{admin}}/api/admin/accounts?loaiTK=NV
+
+###
+GET {{admin}}/api/admin/employees?trangThai=DANG_LAM
+
+### Thêm nhân viên (AD_DANH_MUC); sửa: PUT /api/admin/employees/{maNV} cùng thân, trangThai DA_NGHI → tài khoản bị khóa
+POST {{admin}}/api/admin/employees
+Content-Type: application/json
+X-XSRF-TOKEN: {{loginAd.response.body.$.xsrfToken}}
+
+{ "hoTen": "Trương Văn Tâm", "maCV": "NV_BAN_HANG", "sdt": "0912000099", "email": "tam.truong@nv.example.com", "ngayVaoLam": "2026-10-01", "maCH": 1, "trangThai": "DANG_LAM" }
+
+###
+GET {{admin}}/api/admin/roles
+
+###
+GET {{admin}}/api/admin/audit-logs?hanhDong=DANG_NHAP&soDong=20
+
+###
+GET {{admin}}/api/admin/system
+
+###
+GET {{admin}}/api/admin/lookups
+
+###
+GET {{admin}}/api/admin/products?tuKhoa=áo&sapXep=GIA_GIAM&trang=1&soDong=10
+
+###
+GET {{admin}}/api/admin/products/1
+
+###
+# @name newProduct
+POST {{admin}}/api/admin/products
+Content-Type: application/json
+X-XSRF-TOKEN: {{loginAd.response.body.$.xsrfToken}}
+
+{ "maSKU": "DEMO-001", "tenSP": "Áo polo demo", "maLoai": 1, "maNCC": 1, "giaNiemYet": 399000, "trangThai": "SAP_RA_MAT", "ngayRaMat": "2026-12-01", "chatLieu": "Cotton pique" }
+
+###
+PUT {{admin}}/api/admin/products/{{newProduct.response.body.$.maSP}}
+Content-Type: application/json
+X-XSRF-TOKEN: {{loginAd.response.body.$.xsrfToken}}
+
+{ "maSKU": "DEMO-001", "tenSP": "Áo polo demo", "maLoai": 1, "maNCC": 1, "giaNiemYet": 349000, "trangThai": "DANG_BAN", "chatLieu": "Cotton pique" }
+
+###
+GET {{admin}}/api/admin/suppliers?sapXep=SO_SP_GIAM
+
+###
+POST {{admin}}/api/admin/suppliers
+Content-Type: application/json
+X-XSRF-TOKEN: {{loginAd.response.body.$.xsrfToken}}
+
+{ "tenNCC": "Công ty Demo Dệt Kim", "quocGia": "Việt Nam", "sdt": "028 3800 9999", "email": "demo@detkim.example.com" }
+
+###
+POST {{admin}}/api/admin/categories
+Content-Type: application/json
+X-XSRF-TOKEN: {{loginAd.response.body.$.xsrfToken}}
+
+{ "tenLoai": "Đồ bơi", "moTa": "Đồ bơi nam nữ" }
+
+###
+# Gọi API Admin qua cổng 5000 → 404 (tách cổng)
+GET {{crm}}/api/admin/accounts
+
+###############################################################################
+# 4. Quên mật khẩu (L5) – chưa đăng nhập
+#    Development: email được ghi thành tệp .eml trong src/CrmUniqlo.Api/.mail/;
+#    chép phần sau "#token=" trong liên kết vào biến @resetToken.
+###############################################################################
+POST {{crm}}/api/auth/logout
+X-XSRF-TOKEN: {{loginAd.response.body.$.xsrfToken}}
+
+###
+# @name xsrfQuen2
+GET {{crm}}/api/auth/antiforgery
+
+###
+POST {{crm}}/api/auth/forgot-password
+Content-Type: application/json
+X-XSRF-TOKEN: {{xsrfQuen2.response.body.$.xsrfToken}}
+
+{ "tenDangNhap": "kh.chau", "email": "chau.le@example.com" }
+
+###
+@resetToken = dan-ma-trong-email-vao-day
+POST {{crm}}/api/auth/reset-password
+Content-Type: application/json
+X-XSRF-TOKEN: {{xsrfQuen2.response.body.$.xsrfToken}}
+
+{ "token": "{{resetToken}}", "matKhauMoi": "MatKhauMoi2026" }

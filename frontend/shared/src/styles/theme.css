@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@source "../";
+
+/*
+ * Design tokens – đặc tả FrontEnd v1.2 mục 6.1.
+ * Phong cách tối giản kiểu thời trang (Swiss): nền trắng / xám rất nhạt, chữ đen, một màu nhấn đỏ
+ * dùng tiết chế cho hành động chính và trạng thái cần chú ý.
+ */
+@theme {
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --color-bg: #ffffff;
+  --color-surface: #f7f7f7;
+  --color-surface-2: #efefef;
+  --color-ink: #1a1a1a;
+  --color-ink-soft: #3c3c3c;
+  --color-muted: #5f6368;
+  --color-line: #e0e0e0;
+  --color-line-strong: #c4c4c4;
+  --color-accent: #c8102e;
+  --color-accent-hover: #a50d26;
+  --color-accent-soft: #fbeaec;
+  --color-success: #1e7d32;
+  --color-success-soft: #e8f3ea;
+  --color-warning: #9a5b00;
+  --color-warning-soft: #fdf3e3;
+  --color-danger: #b3261e;
+  --color-danger-soft: #fbeceb;
+  --color-info: #1f5fad;
+  --color-info-soft: #eaf1fa;
+  --color-night: #111111;
+  /* Màu thanh biểu đồ một chuỗi (báo cáo, thống kê khảo sát). */
+  --color-chart: #2f6db5;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.5;
+    font-feature-settings: "cv11", "ss01";
+  }
+  /* Focus luôn nhìn thấy: viền 2px #1A1A1A, offset 2px (đặc tả mục 14). */
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+  .on-dark :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline-color: #ffffff;
+  }
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  label[for],
+  summary {
+    cursor: pointer;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  dialog::backdrop {
+    background: rgb(17 17 17 / 0.45);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@keyframes crm-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@utility animate-fade-up {
+  animation: crm-fade-up 240ms cubic-bezier(0.2, 0, 0, 1) both;
+}

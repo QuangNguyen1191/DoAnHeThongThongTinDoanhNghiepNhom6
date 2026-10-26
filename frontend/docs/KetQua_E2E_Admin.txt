@@ -1,0 +1,56 @@
+PASS  Tổng quan: đủ 8 lối tắt chức năng
+PASS  Danh sách tài khoản đọc API thật  — 19 tài khoản
+PASS  Không có cột mật khẩu / chuỗi băm
+PASS  Dòng của chính mình không có nút thao tác
+PASS  Tài khoản KH không có nút Vai trò (chỉ có vai trò Khách hàng)
+PASS  Lọc theo loại Nhân viên  — 5 tài khoản NV
+PASS  Nhân viên: thiếu thông tin → báo lỗi tại ô
+PASS  Nhân viên: SĐT trùng → báo lỗi
+PASS  Nhân viên mới có trong danh sách, chưa có tài khoản
+PASS  Tạo TK: nhân viên được chọn sẵn
+PASS  Tạo TK: thiếu tên đăng nhập/vai trò → báo lỗi
+PASS  Tạo TK: tên đăng nhập trùng → lỗi tại ô
+PASS  Tạo TK: hiện mật khẩu tạm một lần  — nv.e2e4717844
+PASS  Tài khoản mới đăng nhập web Quản lý → bắt buộc đổi mật khẩu  — /change-password?batbuoc=1
+PASS  Đổi vai trò → cột vai trò hiện QUAN_LY
+PASS  Khóa cần lý do (nút bị khóa khi trống)
+PASS  Khóa → trạng thái Đã khóa, hiện lý do
+PASS  Tài khoản bị khóa không đăng nhập được  — Tài khoản không thể đăng nhập Tài khoản đã bị khóa. Vui lòng liên hệ q
+PASS  Mở khóa → Hoạt động
+PASS  Đặt lại MK: mật khẩu cũ hết hiệu lực, mật khẩu tạm mới đăng nhập được
+PASS  Nghỉ việc: cảnh báo tài khoản sẽ bị khóa trước khi lưu
+PASS  Nghỉ việc → tài khoản Đã khóa (lý do: nghỉ việc)
+PASS  Không mở khóa được tài khoản của nhân viên đã nghỉ
+PASS  Xóa: hộp xác nhận ghi rõ hồ sơ và lịch sử vẫn được giữ
+PASS  Xóa → tài khoản biến khỏi danh sách
+PASS  Xóa → hồ sơ nhân viên vẫn còn
+PASS  Ma trận: 2 cổng (Quản trị, Quản lý)
+PASS  Không tự gỡ quyền Phân quyền khỏi vai trò của mình
+PASS  Cấp QL_BAO_CAO → cskh.hoa thấy menu Báo cáo
+PASS  Gỡ QL_BAO_CAO → cskh.hoa mất menu Báo cáo
+PASS  Tạo vai trò mới → có cột trong ma trận  — E2E_17844
+PASS  Tra cứu KH: SĐT đều đã che  — 090xxxx008
+PASS  Tra cứu KH: chỉ xem (không có nút trong bảng)
+PASS  Chọn SKU → điền sẵn giá niêm yết
+PASS  Nạp hóa đơn kh.ha → hạng VIP  — VIP
+PASS  Kênh Online → ẩn cửa hàng và nhân viên
+PASS  Trùng số hóa đơn → lỗi tại ô Số hóa đơn
+PASS  kh.ha đăng nhập web Khách thấy hạng VIP
+PASS  Chi tiết hóa đơn có 2 dòng hàng
+PASS  Đổi trả: số lượng vượt phần còn lại → chặn
+PASS  Nạp đổi trả → cột Đã đổi trả cập nhật
+PASS  Xét lại hạng toàn bộ → báo số khách đổi hạng  — 0 khách hàng đổi hạng
+PASS  Nhật ký: lọc Tạo tài khoản thấy tài khoản vừa tạo
+PASS  Nhật ký ghi đủ: đổi vai trò, khóa, xóa TK, cập nhật quyền, nạp hóa đơn
+PASS  Trạng thái hệ thống: 3 kết nối đều tốt
+PASS  it.mai: menu không có Vai trò và quyền, Hóa đơn, Nhật ký
+PASS  it.mai: không có nút Tạo tài khoản nhân viên
+PASS  it.mai: tài khoản NV không có nút Vai trò / Đặt lại MK
+PASS  it.mai: tài khoản KH có nút Đặt lại MK
+PASS  it.mai: gõ URL Vai trò và quyền → không có quyền
+PASS  it.mai: gọi thẳng API đổi vai trò → 403 (CSDL chặn 50003)  — 403
+PASS  it.mai: đặt lại MK tài khoản nội bộ qua API → 403  — 403
+PASS  ql.lan đăng nhập trang Admin → bị từ chối
+PASS  Không có lỗi JavaScript trên trang
+
+TỔNG: 54/54 PASS

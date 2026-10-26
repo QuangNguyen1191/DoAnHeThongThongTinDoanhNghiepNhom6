@@ -1,0 +1,44 @@
+PASS  CN1: trang đăng nhập có liên kết sang Đăng ký
+PASS  CN1: để trống → báo lỗi tại ô
+PASS  CN1: mật khẩu nhập lại không khớp → báo lỗi
+PASS  CN1: SĐT đã có hồ sơ → báo lỗi tại ô SĐT  — Số điện thoại đã thuộc một hồ sơ khách hàng đang hoạt động.
+PASS  CN1: đăng ký thành công → tự đăng nhập, vào trang khách hàng  — kh.e2e4701504
+PASS  CN1: khách mới hạng Thường, 0 điểm
+PASS  Menu khách: Trang chủ, Thông tin cá nhân, Phản hồi sản phẩm, Khảo sát, Đổi mật khẩu  — Trang chủ, Thông tin cá nhân, Phản hồi sản phẩm, Khảo sát, Đổi mật khẩu
+PASS  Trang chủ: 3 lối tắt chức năng
+PASS  CN8: sai mật khẩu → thông báo chung
+PASS  CN8: đăng nhập đúng → vào /customer
+PASS  CN8: khách gõ URL /manager → không có quyền
+PASS  Trang thừa /customer/orders đã gỡ → 404
+PASS  CN2: xem hồ sơ đúng thông tin đăng ký
+PASS  CN2: SĐT sai định dạng → lỗi tại ô
+PASS  CN2: SĐT trùng khách khác → lỗi từ CSDL tại ô SĐT  — Số điện thoại hoặc email đã được một hồ sơ khác sử dụng.
+PASS  CN2: lưu và tải lại → họ tên, email, giới tính mới
+PASS  CN2: sở thích mới (Áo khoác, Quần jeans; bỏ Áo thun)  — Áo khoác, Quần jeans
+PASS  CN2: tên mới hiện trên trang chủ
+PASS  CN3: để trống → báo lỗi từng mục
+PASS  CN3: không cho phản hồi sản phẩm Sắp ra mắt  — 11 sản phẩm
+PASS  CN3: phản hồi hiện trong danh sách, trạng thái Đã gửi
+PASS  CN3: phản hồi tới trang Quản lý (tab Mới)  — mã 11
+PASS  CN3: quản lý trả lời (API)  — 204
+PASS  CN3: khách thấy câu trả lời của cửa hàng, trạng thái Đã trả lời
+PASS  CN4: khách mới chưa có khảo sát
+PASS  CN4: quản lý gửi khảo sát tới tài khoản khách  — {"soNguoiNhanMoi":1}
+PASS  CN4: khách nhận được khảo sát (Chờ thực hiện, voucher 12%)
+PASS  CN4: trang chủ báo khảo sát chờ
+PASS  CN4: mở khảo sát hiện đủ 4 câu hỏi
+PASS  CN4: nộp khi chưa trả lời → báo 3 câu bắt buộc
+PASS  CN4: đếm số câu đã trả lời
+PASS  CN4: nộp xong nhận voucher 12%  — -12% V6-C60781ED Dùng đến 21/11/2026 · xem lại trong mục Khảo sát → Voucher
+PASS  CN4: mở lại → xem câu trả lời đã gửi, không sửa được
+PASS  CN4: nộp lần 2 (gọi thẳng API) → bị từ chối  — 422
+PASS  CN4: voucher hiện trong mục Khảo sát → Voucher, Còn hạn
+PASS  CN4: khảo sát chuyển sang Đã hoàn thành
+PASS  CN4: kết quả về trang Quản lý (hoàn thành 1)  — {"maKS":6,"tieuDe":"E2E khảo sát khách 4701504","mucDich":"DO_HAI_LONG","tenSP":null,"trangThai":"DA_GUI","ngayPhatHanh":"2026-10-22T21:31:52+07:00","hanTraLoi":"2026-10-30T04:31:52+07:00","soNguoiNhan":1,"soHoanThanh":1,"tyLePhanHoiPhanTram":100}
+PASS  CN4: khảo sát quản lý đã đóng → khách không làm được
+PASS  CN4: khảo sát không gửi cho mình → API 404, giao diện báo không tìm thấy  — 404
+PASS  Mobile: danh sách khảo sát không tràn ngang
+PASS  kh.an (dữ liệu mẫu) làm khảo sát số 2 trên điện thoại → voucher 5%
+PASS  Không có lỗi JavaScript trên trang
+
+42/42 PASS
